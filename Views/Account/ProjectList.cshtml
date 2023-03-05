@@ -1,0 +1,92 @@
+﻿@model ProjectModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.Data.SqlClient;
+@using MySqlConnector;
+@using MySqlX.XDevAPI.Common;
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Mvc;
+
+@{
+    ViewData["Title"] = "Project List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@{
+    @Html.AntiForgeryToken()
+
+    string UserName = HttpContextAccessor.HttpContext.Session.GetString("userName");
+    if (UserName != null)
+    {
+        string connString = "Server=localhost;Database=eportfolio;Uid=root;Pwd=aGibxMhi;";
+        using(MySqlConnection conn = new MySqlConnection(connString))
+        {
+            conn.Open();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM projects WHERE UserId=@UserId", conn);
+            command.Parameters.AddWithValue("@UserId", HttpContextAccessor.HttpContext.Session.GetInt32("userId"));
+            MySqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var ProjectName = (string)reader["ProjectName"];
+                    var ProjectDesc = (string)reader["ProjectDesc"];
+
+                    <li class="row" style="background-color: rgba(0, 0, 20, 0.5); border-radius: 10px; padding: 20px; margin: 20px;">
+                        <div class="col-lg-9 d-inline-flex">
+                            <a class="nav-link proj" asp-area="" asp-controller="Home" asp-action="Project">
+                                @ProjectName
+                                <span class="sr-only">(current)</span>
+                                <br/>
+                                <div>@ProjectDesc</div>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-6 d-inline-flex" style="height: 50px; padding: 0px;">
+                            <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="EditProject" style="text-align: center; width: 50%;">Edit</button>
+                            <button type="submit" class="btn btn-danger" asp-controller="Account" asp-action="DeleteProject" style="text-align: center; width: 50%;">Delete</button>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="nav-item">
+                    There are no projects here
+                </li>
+            }
+
+            reader.Close();
+            conn.Close();
+
+            @using (Html.BeginForm("ProjectList", "Account", FormMethod.Post, new { @class = "form-horizontal", @style = "padding: 20px;", role = "form" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ProjectName, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ProjectName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ProjectDesc, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ProjectDesc, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-primary">Add Project</button>
+                    </div>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <div>Login or Register</div>
+    }
+}

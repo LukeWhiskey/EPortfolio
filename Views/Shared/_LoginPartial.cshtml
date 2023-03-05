@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<nav class="navbar navbar-dark d-flex justify-content-start navbar-expand bg-trasnparent mb-3" style="margin-left: 0px;">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <form class="form-inline" asp-area="" asp-controller="Home" asp-action="Index">
+                <button type="submit" class="nav-link btn btn-link">Home</button>
+            </form>
+        </li>
+        @{
+            string UserName = HttpContextAccessor.HttpContext.Session.GetString("userName");
+            if (UserName != null)
+            {
+                <li class="nav-item">
+                    <form class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
+                        <button  type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline" asp-controller="Account" asp-action="ProjectList">
+                        <button type="submit" class="nav-link btn btn-link">Edit Projects</button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                </li>
+            }
+        }
+    </ul>
+</nav>
