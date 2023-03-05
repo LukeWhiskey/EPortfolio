@@ -1,0 +1,198 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(20, 20, 20);
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.backcont {
+    height: 100vh;
+}
+
+.youimg {
+    cursor: pointer;
+    transition: 0.125s ease;
+}
+
+    .youimg:hover {
+        transition: 0.125s ease;
+        transform: scale(1.1);
+    }
+
+.open {
+    display: flex;
+}
+
+.close {
+    display: none;
+}
+
+.headercont {
+    margin-top: 25vh;
+    padding: 100px;
+}
+
+.navb {
+    width: 300px;
+    height: 100%;
+    background-color: rgb(0, 0, 20);
+    float: left;
+}
+
+.social {
+    border: 2px solid rgb(40, 40, 40);
+    border-radius: 50%;
+    height: 41px;
+    margin: 5px;
+    background-position: center center;
+    background-size: cover;
+    transition: 0.125s ease;
+}
+
+.projimg {
+    float: left;
+    height: 27.5px;
+    width: 60px;
+    transform: translateY(25%);
+    background-image: url('Assets/projimg.png');
+    background-position: center center;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+    .projimg:active {
+        background-image: url('Assets/projimgactive.png');
+    }
+
+.proj {
+    float: left;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0%);
+    }
+
+    25% {
+        transform: translateY(-20%) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(0%) scale(1);
+    }
+
+    75% {
+        transform: translateY(-5%) scale(1.1);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.social:hover {
+    animation: bounce 0.35s ease-in-out forwards;
+}
+
+.in {
+    background-image: url('Assets/in.jpg');
+}
+
+    .in:hover {
+        background-image: url('Assets/inhover.jpg');
+    }
+
+.fb {
+    background-image: url('Assets/fb.jpg');
+}
+
+    .fb:hover {
+        background-image: url('Assets/fbhover.jpg');
+    }
+
+.insta {
+    background-image: url('Assets/git.png');
+}
+
+    .insta:hover {
+        background-image: url('Assets/githover.png');
+    }
+
+.up {
+    background-image: url('Assets/up.jpg');
+}
+
+    .up:hover {
+        background-image: url('Assets/uphover.jpg');
+    }
+
+.wa {
+    background-image: url('Assets/wa.jpg');
+}
+
+    .wa:hover {
+        background-image: url('Assets/wahover.jpg');
+    }
+
+.backimg {
+    background-image: radial-gradient(transparent, rgba(20, 20, 20, 0.75)), url('Assets/place.jpg');
+    width: calc(100% - 300px);
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    float: left;
+    transition: 0.5s ease;
+}
+
+.nav-item {
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+    .backimg {
+        max-width: calc(100vw - 300px);
+        margin-right: 0px;
+        transition: none;
+    }
+}
+
+@media (max-width: 281px) {
+    .navb {
+        margin-left: -10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #nav.width {
+        -webkit-transition: width 0.15s ease;
+        -moz-transition: width 0.15s ease;
+        -o-transition: width 0.15s ease;
+        transition: width 0.15s ease;
+    }
+
+    .open {
+        display: flex;
+    }
+
+    .close {
+        display: flex;
+    }
+
+    .headercont {
+        margin-top: 30vh;
+        padding: 50px;
+    }
+
+    .navb {
+        min-height: 100vh;
+        position: absolute;
+    }
+
+    .backimg {
+        width: 100%;
+        float: right;
+    }
+}
