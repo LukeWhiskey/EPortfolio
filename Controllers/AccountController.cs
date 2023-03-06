@@ -10,7 +10,7 @@ namespace Eportfolio.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly string connectionString = "Server=localhost;Database=eportfolio;Uid=root;Pwd=aGibxMhi;";
+        private readonly string connectionString = "Server=localhost;Database=eportfolio;Uid=root;Pwd=;";
         private readonly ILogger<AccountController> _logger;
         private readonly IAuthenticationService _authService;
 
