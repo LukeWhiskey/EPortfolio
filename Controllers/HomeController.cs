@@ -9,7 +9,7 @@ namespace Eportfolio.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly string connectionString = "Server=localhost;Database=eportfolio;Uid=root;Pwd=aGibxMhi;";
+        private readonly string connectionString = "Server=localhost;Database=eportfolio;Uid=root;Pwd=;";
 
         public HomeController(ILogger<HomeController> logger)
         {
